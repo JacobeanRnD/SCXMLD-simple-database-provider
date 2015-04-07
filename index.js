@@ -9,6 +9,9 @@ module.exports = function (opts) {
     definitionToInstances = {},
     events = {},
     metaInformation = {};
+
+
+  db.init = function (initialized){initialized()};
     
   db.saveStatechart = function (name, scxmlString, done) {
     definitions[name] = scxmlString;
