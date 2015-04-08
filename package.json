@@ -1,8 +1,14 @@
 {
   "name": "SCXMLD-simple-database-provider",
-  "version": "1.0.0",
+  "version": "0.0.1a",
   "description": "",
   "main": "index.js",
+  "license": "Apache-2.0",
+  "author": {
+    "name" : "Jacob Beard",
+    "email" : "jake@jacobeanrnd.com",
+    "url" : "http://github.com/jbeard4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,8 +19,6 @@
   "keywords": [
     "scxml"
   ],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/jbeard4/SCXMLD-simple-database-provider/issues"
   },
