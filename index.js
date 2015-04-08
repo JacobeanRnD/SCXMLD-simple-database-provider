@@ -11,9 +11,9 @@ module.exports = function (opts) {
     metaInformation = {};
 
 
-  db.init = function (initialized){initialized()};
+  db.init = function (initialized){ initialized(); };
     
-  db.saveStatechart = function (name, scxmlString, done) {
+  db.saveStatechart = function (user, name, scxmlString, done) {
     definitions[name] = scxmlString;
     definitionToInstances[name] = [];
 
@@ -30,7 +30,7 @@ module.exports = function (opts) {
     done();
   };
 
-  db.getStatechartList = function (done) {
+  db.getStatechartList = function (user, done) {
     done(null, Object.keys(definitions));
   };
 
@@ -46,7 +46,7 @@ module.exports = function (opts) {
   db.getInstance = function (chartName, instanceId, done) {
     var exists = definitionToInstances[chartName].indexOf(instanceId) !== -1;
 
-    done(exists);
+    done(null, exists);
   };
 
   db.getInstances = function (chartName, done) {
