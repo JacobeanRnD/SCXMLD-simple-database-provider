@@ -66,6 +66,10 @@ module.exports = function (opts) {
     done();
   };
 
+  db.getEvents = function (instanceId, done) {
+    done(null, events[instanceId]);
+  };
+
   db.set = function (key, value, done) {
     metaInformation[key] = value;
 
