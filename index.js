@@ -61,6 +61,7 @@ module.exports = function (opts) {
   };
 
   db.saveEvent = function (instanceId, event, done) {
+    event.instanceId = instanceId;
     events[instanceId].push(event);
 
     done();
