@@ -34,23 +34,23 @@ module.exports = function (opts) {
     done(null, Object.keys(definitions));
   };
 
-  db.saveInstance = function (chartName, instanceId, done) {
+  db.saveInstance = function (chartName, instanceId, conf, done) {
     events[instanceId] = [];
 
     var map = definitionToInstances[chartName] = definitionToInstances[chartName] || [];
-    map.push(instanceId);
+    map[instanceId] = conf;
 
     done();
   };
 
   db.getInstance = function (chartName, instanceId, done) {
-    var exists = definitionToInstances[chartName].indexOf(instanceId) !== -1;
+    var conf = definitionToInstances[chartName][instanceId];
 
-    done(null, exists);
+    done(null, conf);
   };
 
   db.getInstances = function (chartName, done) {
-    done(null, definitionToInstances[chartName]);
+    done(null, Object.keys(definitionToInstances[chartName]));
   };
 
   db.deleteInstance = function (chartName, instanceId, done) {
