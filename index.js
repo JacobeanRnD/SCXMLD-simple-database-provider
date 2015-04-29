@@ -44,7 +44,13 @@ module.exports = function (opts) {
   };
 
   db.getInstance = function (chartName, instanceId, done) {
-    var conf = definitionToInstances[chartName][instanceId];
+    var stateChartinstances = definitionToInstances[chartName];
+
+    if(!stateChartinstances) return done({ statusCode: 404 });
+
+    var conf = stateChartinstances[instanceId];
+
+    if(typeof conf === 'undefined') return done({ statusCode: 404 });
 
     done(null, conf);
   };
