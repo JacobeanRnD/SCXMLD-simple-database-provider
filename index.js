@@ -13,8 +13,8 @@ module.exports = function (opts) {
 
   db.init = function (initialized){ initialized(); };
     
-  db.saveStatechart = function (user, name, scxmlString, done) {
-    definitions[name] = scxmlString;
+  db.saveStatechart = function (user, name, done) {
+    definitions[name] = { };
     definitionToInstances[name] = [];
 
     done();
