@@ -13,8 +13,8 @@ module.exports = function (opts) {
 
   db.init = function (initialized){ initialized(); };
     
-  db.saveStatechart = function (user, name, scxmlString, done) {
-    definitions[name] = scxmlString;
+  db.saveStatechart = function (user, name, done) {
+    definitions[name] = { };
     definitionToInstances[name] = [];
 
     done();
@@ -34,23 +34,29 @@ module.exports = function (opts) {
     done(null, Object.keys(definitions));
   };
 
-  db.saveInstance = function (chartName, instanceId, done) {
+  db.saveInstance = function (chartName, instanceId, conf, done) {
     events[instanceId] = [];
 
     var map = definitionToInstances[chartName] = definitionToInstances[chartName] || [];
-    map.push(instanceId);
+    map[instanceId] = conf;
 
     done();
   };
 
   db.getInstance = function (chartName, instanceId, done) {
-    var exists = definitionToInstances[chartName].indexOf(instanceId) !== -1;
+    var stateChartinstances = definitionToInstances[chartName];
 
-    done(null, exists);
+    if(!stateChartinstances) return done({ statusCode: 404 });
+
+    var conf = stateChartinstances[instanceId];
+
+    if(typeof conf === 'undefined') return done({ statusCode: 404 });
+
+    done(null, conf);
   };
 
   db.getInstances = function (chartName, done) {
-    done(null, definitionToInstances[chartName]);
+    done(null, Object.keys(definitionToInstances[chartName]));
   };
 
   db.deleteInstance = function (chartName, instanceId, done) {
