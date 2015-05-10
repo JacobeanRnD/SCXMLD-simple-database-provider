@@ -61,6 +61,7 @@ module.exports = function (opts) {
 
   db.deleteInstance = function (chartName, instanceId, done) {
     var arr = definitionToInstances[chartName];
+    if(!arr) return done({message : 'Not found'});
     arr.splice(arr.indexOf(instanceId), 1);
 
     done();
