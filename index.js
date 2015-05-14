@@ -56,6 +56,9 @@ module.exports = function (opts) {
   };
 
   db.getInstances = function (chartName, done) {
+    var arr = definitionToInstances[chartName];
+    if(!arr) return done({message : 'Not found'});
+    
     done(null, Object.keys(definitionToInstances[chartName]));
   };
 
